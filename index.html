@@ -1,0 +1,2424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SATE-UCH | Sistema de Alerta Temprana</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                S
+            </div>
+
+            <div>
+                <h2>SATE-UCH</h2>
+                <span>Alerta Temprana</span>
+            </div>
+
+        </div>
+
+
+        <div class="institution">
+            UNIVERSIDAD DE CIENCIAS Y HUMANIDADES
+        </div>
+
+
+        <nav class="navigation">
+
+            <p class="nav-title">MONITOREO</p>
+
+            <button class="nav-item active"
+                    onclick="showSection('dashboard', this)">
+                <span>▦</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item"
+                    onclick="showSection('estudiantes', this)">
+                <span>♙</span>
+                Estudiantes
+            </button>
+
+            <button class="nav-item"
+                    onclick="showSection('alertas', this)">
+                <span>⚠</span>
+                Alertas
+                <b class="menu-alert">12</b>
+            </button>
+
+
+            <p class="nav-title">TUTORÍA</p>
+
+            <button class="nav-item"
+                    onclick="showSection('seguimiento', this)">
+                <span>◷</span>
+                Seguimiento
+            </button>
+
+            <button class="nav-item"
+                    onclick="showSection('intervenciones', this)">
+                <span>♧</span>
+                Intervenciones
+            </button>
+
+            <button class="nav-item"
+                    onclick="showSection('citas', this)">
+                <span>□</span>
+                Citas
+            </button>
+
+
+            <p class="nav-title">ANÁLISIS</p>
+
+            <button class="nav-item"
+                    onclick="showSection('reportes', this)">
+                <span>▥</span>
+                Reportes
+            </button>
+
+            <button class="nav-item"
+                    onclick="showSection('configuracion', this)">
+                <span>⚙</span>
+                Configuración
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <div class="status-dot"></div>
+
+                <div>
+                    <strong>Sistema operativo</strong>
+                    <small>Última actualización: hoy</small>
+                </div>
+
+            </div>
+
+
+            <div class="user">
+
+                <div class="avatar">
+                    TU
+                </div>
+
+                <div>
+                    <strong>Tutoría Universitaria</strong>
+                    <small>Administrador</small>
+                </div>
+
+                <span>⋮</span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="mobile-header">
+
+                <button class="hamburger"
+                        onclick="toggleSidebar()">
+                    ☰
+                </button>
+
+                <strong>SATE-UCH</strong>
+
+            </div>
+
+
+            <div class="global-search">
+
+                <span>⌕</span>
+
+                <input
+                    id="globalSearch"
+                    type="text"
+                    placeholder="Buscar estudiante, código..."
+                    onkeyup="globalSearch()"
+                >
+
+            </div>
+
+
+            <div class="top-right">
+
+                <button class="notification-button">
+
+                    ♧
+
+                    <span>
+                        4
+                    </span>
+
+                </button>
+
+
+                <div class="user-top">
+
+                    <div class="avatar">
+                        TU
+                    </div>
+
+                    <div>
+
+                        <strong>Tutoría Universitaria</strong>
+
+                        <small>
+                            Administrador
+                        </small>
+
+                    </div>
+
+                    <span>⌄</span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <div class="content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section id="dashboard"
+                     class="section active-section">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            SISTEMA DE ALERTA TEMPRANA
+                        </span>
+
+                        <h1>
+                            Dashboard
+                        </h1>
+
+                        <p>
+                            Monitoreo preventivo del riesgo de deserción estudiantil.
+                        </p>
+
+                    </div>
+
+
+                    <div class="header-date">
+
+                        <span>
+                            Periodo académico
+                        </span>
+
+                        <strong>
+                            2026-II
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESUMEN -->
+
+                <div class="risk-cards">
+
+                    <div class="risk-card green">
+
+                        <div class="risk-card-top">
+
+                            <div class="risk-symbol">
+                                ✓
+                            </div>
+
+                            <span>
+                                ESTABLE
+                            </span>
+
+                        </div>
+
+                        <h2 id="greenCount">
+                            824
+                        </h2>
+
+                        <p>
+                            Estudiantes sin indicadores críticos
+                        </p>
+
+                        <div class="card-progress">
+                            <div style="width:82%"></div>
+                        </div>
+
+                        <small>
+                            82% del total
+                        </small>
+
+                    </div>
+
+
+                    <div class="risk-card yellow">
+
+                        <div class="risk-card-top">
+
+                            <div class="risk-symbol">
+                                !
+                            </div>
+
+                            <span>
+                                PRECAUCIÓN
+                            </span>
+
+                        </div>
+
+                        <h2 id="yellowCount">
+                            143
+                        </h2>
+
+                        <p>
+                            Estudiantes con 1 indicador de riesgo
+                        </p>
+
+                        <div class="card-progress">
+                            <div style="width:14%"></div>
+                        </div>
+
+                        <small>
+                            Requieren seguimiento
+                        </small>
+
+                    </div>
+
+
+                    <div class="risk-card red">
+
+                        <div class="risk-card-top">
+
+                            <div class="risk-symbol">
+                                !
+                            </div>
+
+                            <span>
+                                PRIORIDAD
+                            </span>
+
+                        </div>
+
+                        <h2 id="redCount">
+                            37
+                        </h2>
+
+                        <p>
+                            2 o más indicadores de riesgo
+                        </p>
+
+                        <div class="card-progress">
+                            <div style="width:4%"></div>
+                        </div>
+
+                        <small>
+                            Atención prioritaria
+                        </small>
+
+                    </div>
+
+
+                    <div class="risk-card blue">
+
+                        <div class="risk-card-top">
+
+                            <div class="risk-symbol">
+                                ♧
+                            </div>
+
+                            <span>
+                                TUTORÍA
+                            </span>
+
+                        </div>
+
+                        <h2>
+                            28
+                        </h2>
+
+                        <p>
+                            Casos atendidos este periodo
+                        </p>
+
+                        <div class="card-progress">
+                            <div style="width:72%"></div>
+                        </div>
+
+                        <small>
+                            72% de seguimiento completado
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- GRÁFICOS -->
+
+                <div class="dashboard-grid">
+
+                    <div class="panel large-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h3>
+                                    Evolución de alertas
+                                </h3>
+
+                                <p>
+                                    Comparación mensual de estudiantes en riesgo
+                                </p>
+
+                            </div>
+
+                            <select>
+                                <option>2026-II</option>
+                                <option>2026-I</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="chart">
+                            <canvas id="riskChart"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h3>
+                                    Indicadores de riesgo
+                                </h3>
+
+                                <p>
+                                    Principales causas detectadas
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="indicator-list">
+
+                            <div class="indicator">
+
+                                <div class="indicator-icon red">
+                                    ▤
+                                </div>
+
+                                <div class="indicator-info">
+
+                                    <strong>
+                                        Bajo rendimiento
+                                    </strong>
+
+                                    <span>
+                                        86 estudiantes
+                                    </span>
+
+                                </div>
+
+                                <b>
+                                    42%
+                                </b>
+
+                            </div>
+
+
+                            <div class="indicator">
+
+                                <div class="indicator-icon yellow">
+                                    ◷
+                                </div>
+
+                                <div class="indicator-info">
+
+                                    <strong>
+                                        Inasistencias
+                                    </strong>
+
+                                    <span>
+                                        61 estudiantes
+                                    </span>
+
+                                </div>
+
+                                <b>
+                                    30%
+                                </b>
+
+                            </div>
+
+
+                            <div class="indicator">
+
+                                <div class="indicator-icon orange">
+                                    $
+                                </div>
+
+                                <div class="indicator-info">
+
+                                    <strong>
+                                        Pagos pendientes
+                                    </strong>
+
+                                    <span>
+                                        38 estudiantes
+                                    </span>
+
+                                </div>
+
+                                <b>
+                                    19%
+                                </b>
+
+                            </div>
+
+
+                            <div class="indicator">
+
+                                <div class="indicator-icon purple">
+                                    ♧
+                                </div>
+
+                                <div class="indicator-info">
+
+                                    <strong>
+                                        Otros factores
+                                    </strong>
+
+                                    <span>
+                                        18 estudiantes
+                                    </span>
+
+                                </div>
+
+                                <b>
+                                    9%
+                                </b>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALERTAS RECIENTES -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Estudiantes que requieren atención
+                            </h3>
+
+                            <p>
+                                Casos con mayor nivel de riesgo detectado
+                            </p>
+
+                        </div>
+
+                        <button class="text-button"
+                                onclick="showSection('alertas')">
+
+                            Ver todas →
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        ESTUDIANTE
+                                    </th>
+
+                                    <th>
+                                        CARRERA
+                                    </th>
+
+                                    <th>
+                                        CICLO
+                                    </th>
+
+                                    <th>
+                                        INDICADORES
+                                    </th>
+
+                                    <th>
+                                        NIVEL
+                                    </th>
+
+                                    <th>
+                                        ACCIÓN
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="person">
+
+                                            <div class="person-avatar">
+                                                JP
+                                            </div>
+
+                                            <div>
+
+                                                <strong>
+                                                    Juan Carlos Pérez
+                                                </strong>
+
+                                                <span>
+                                                    2023102456
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+                                        Ingeniería de Sistemas
+                                    </td>
+
+                                    <td>
+                                        VII
+                                    </td>
+
+                                    <td>
+                                        <span class="indicator-pill">
+                                            Notas · Asistencia
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge danger">
+                                            🔴 Alto
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button
+                                            class="view-button"
+                                            onclick="openStudent('Juan Carlos Pérez')">
+                                            Ver perfil
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="person">
+
+                                            <div class="person-avatar">
+                                                ML
+                                            </div>
+
+                                            <div>
+
+                                                <strong>
+                                                    María López García
+                                                </strong>
+
+                                                <span>
+                                                    2024201832
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+                                        Enfermería
+                                    </td>
+
+                                    <td>
+                                        IV
+                                    </td>
+
+                                    <td>
+                                        <span class="indicator-pill">
+                                            Notas · Pagos
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge danger">
+                                            🔴 Alto
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button
+                                            class="view-button"
+                                            onclick="openStudent('María López García')">
+                                            Ver perfil
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="person">
+
+                                            <div class="person-avatar">
+                                                AR
+                                            </div>
+
+                                            <div>
+
+                                                <strong>
+                                                    Andrea Ramírez
+                                                </strong>
+
+                                                <span>
+                                                    2025103981
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+                                        Administración
+                                    </td>
+
+                                    <td>
+                                        III
+                                    </td>
+
+                                    <td>
+                                        <span class="indicator-pill">
+                                            Asistencia
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge warning">
+                                            🟡 Medio
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button
+                                            class="view-button"
+                                            onclick="openStudent('Andrea Ramírez')">
+                                            Ver perfil
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="person">
+
+                                            <div class="person-avatar">
+                                                DG
+                                            </div>
+
+                                            <div>
+
+                                                <strong>
+                                                    Diego García
+                                                </strong>
+
+                                                <span>
+                                                    2022204517
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+                                        Ingeniería Electrónica
+                                    </td>
+
+                                    <td>
+                                        IX
+                                    </td>
+
+                                    <td>
+                                        <span class="indicator-pill">
+                                            Pagos
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge warning">
+                                            🟡 Medio
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button
+                                            class="view-button"
+                                            onclick="openStudent('Diego García')">
+                                            Ver perfil
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= ESTUDIANTES ================= -->
+
+            <section id="estudiantes"
+                     class="section">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            MONITOREO ESTUDIANTIL
+                        </span>
+
+                        <h1>
+                            Estudiantes
+                        </h1>
+
+                        <p>
+                            Consulta el estado integral de cada estudiante.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="filter-container">
+
+                    <div class="table-search">
+
+                        <span>⌕</span>
+
+                        <input
+                            id="studentSearch"
+                            type="text"
+                            placeholder="Buscar por nombre o código..."
+                            onkeyup="filterStudents()"
+                        >
+
+                    </div>
+
+
+                    <select
+                        id="riskFilter"
+                        onchange="filterStudents()">
+
+                        <option value="all">
+                            Todos los niveles
+                        </option>
+
+                        <option value="green">
+                            🟢 Estable
+                        </option>
+
+                        <option value="yellow">
+                            🟡 Precaución
+                        </option>
+
+                        <option value="red">
+                            🔴 Prioridad
+                        </option>
+
+                    </select>
+
+
+                    <select>
+
+                        <option>
+                            Todas las carreras
+                        </option>
+
+                        <option>
+                            Ingeniería de Sistemas
+                        </option>
+
+                        <option>
+                            Enfermería
+                        </option>
+
+                        <option>
+                            Administración
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="panel table-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Estado de estudiantes
+                            </h3>
+
+                            <p>
+                                Datos demostrativos para el prototipo
+                            </p>
+
+                        </div>
+
+                        <span class="record-count">
+                            1,004 estudiantes
+                        </span>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table id="studentsTable">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        ESTUDIANTE
+                                    </th>
+
+                                    <th>
+                                        CARRERA
+                                    </th>
+
+                                    <th>
+                                        CICLO
+                                    </th>
+
+                                    <th>
+                                        NOTAS
+                                    </th>
+
+                                    <th>
+                                        ASISTENCIA
+                                    </th>
+
+                                    <th>
+                                        PAGOS
+                                    </th>
+
+                                    <th>
+                                        SEMÁFORO
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr data-risk="green">
+
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">
+                                                CR
+                                            </div>
+                                            <div>
+                                                <strong>
+                                                    Carlos Rivera
+                                                </strong>
+                                                <span>
+                                                    2024102451
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        Ingeniería de Sistemas
+                                    </td>
+
+                                    <td>
+                                        V
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            16.8
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            94%
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            Al día
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge success">
+                                            🟢 Estable
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr data-risk="red">
+
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">
+                                                JP
+                                            </div>
+                                            <div>
+                                                <strong>
+                                                    Juan Carlos Pérez
+                                                </strong>
+                                                <span>
+                                                    2023102456
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        Ingeniería de Sistemas
+                                    </td>
+
+                                    <td>
+                                        VII
+                                    </td>
+
+                                    <td>
+                                        <span class="data-danger">
+                                            10.8
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-danger">
+                                            68%
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            Al día
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge danger">
+                                            🔴 Prioridad
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr data-risk="yellow">
+
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">
+                                                AR
+                                            </div>
+                                            <div>
+                                                <strong>
+                                                    Andrea Ramírez
+                                                </strong>
+                                                <span>
+                                                    2025103981
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        Administración
+                                    </td>
+
+                                    <td>
+                                        III
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            15.2
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-warning">
+                                            79%
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            Al día
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge warning">
+                                            🟡 Precaución
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr data-risk="red">
+
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">
+                                                ML
+                                            </div>
+                                            <div>
+                                                <strong>
+                                                    María López García
+                                                </strong>
+                                                <span>
+                                                    2024201832
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        Enfermería
+                                    </td>
+
+                                    <td>
+                                        IV
+                                    </td>
+
+                                    <td>
+                                        <span class="data-danger">
+                                            11.4
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            91%
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-danger">
+                                            2 pendientes
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge danger">
+                                            🔴 Prioridad
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr data-risk="green">
+
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">
+                                                SG
+                                            </div>
+                                            <div>
+                                                <strong>
+                                                    Sofía Gómez
+                                                </strong>
+                                                <span>
+                                                    2026201987
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        Enfermería
+                                    </td>
+
+                                    <td>
+                                        I
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            17.2
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            97%
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            Al día
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge success">
+                                            🟢 Estable
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr data-risk="yellow">
+
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">
+                                                DG
+                                            </div>
+                                            <div>
+                                                <strong>
+                                                    Diego García
+                                                </strong>
+                                                <span>
+                                                    2022204517
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        Ingeniería Electrónica
+                                    </td>
+
+                                    <td>
+                                        IX
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            14.8
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-good">
+                                            93%
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="data-warning">
+                                            1 pendiente
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="risk-badge warning">
+                                            🟡 Precaución
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= ALERTAS ================= -->
+
+            <section id="alertas"
+                     class="section">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ALERTAS TEMPRANAS
+                        </span>
+
+                        <h1>
+                            Centro de alertas
+                        </h1>
+
+                        <p>
+                            Casos que requieren intervención de tutoría.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="alert-summary">
+
+                    <div class="alert-summary-item red-summary">
+
+                        <span>🔴</span>
+
+                        <div>
+                            <strong>
+                                37
+                            </strong>
+
+                            <small>
+                                Alta prioridad
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-summary-item yellow-summary">
+
+                        <span>🟡</span>
+
+                        <div>
+                            <strong>
+                                143
+                            </strong>
+
+                            <small>
+                                Seguimiento preventivo
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-summary-item blue-summary">
+
+                        <span>♧</span>
+
+                        <div>
+                            <strong>
+                                18
+                            </strong>
+
+                            <small>
+                                Intervenciones pendientes
+                            </small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="alert-grid">
+
+
+                    <div class="alert-item high">
+
+                        <div class="alert-header">
+
+                            <span class="risk-badge danger">
+                                🔴 PRIORIDAD
+                            </span>
+
+                            <small>
+                                Hace 25 min
+                            </small>
+
+                        </div>
+
+                        <h3>
+                            Juan Carlos Pérez
+                        </h3>
+
+                        <p>
+                            Ingeniería de Sistemas · VII ciclo
+                        </p>
+
+
+                        <div class="alert-reasons">
+
+                            <span>
+                                📉 Promedio 10.8
+                            </span>
+
+                            <span>
+                                📅 Asistencia 68%
+                            </span>
+
+                        </div>
+
+
+                        <div class="alert-footer">
+
+                            <span>
+                                2 indicadores detectados
+                            </span>
+
+                            <button
+                                onclick="openStudent('Juan Carlos Pérez')">
+                                Atender →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-item high">
+
+                        <div class="alert-header">
+
+                            <span class="risk-badge danger">
+                                🔴 PRIORIDAD
+                            </span>
+
+                            <small>
+                                Hace 1 h
+                            </small>
+
+                        </div>
+
+                        <h3>
+                            María López García
+                        </h3>
+
+                        <p>
+                            Enfermería · IV ciclo
+                        </p>
+
+
+                        <div class="alert-reasons">
+
+                            <span>
+                                📉 Promedio 11.4
+                            </span>
+
+                            <span>
+                                💳 2 pagos pendientes
+                            </span>
+
+                        </div>
+
+
+                        <div class="alert-footer">
+
+                            <span>
+                                2 indicadores detectados
+                            </span>
+
+                            <button
+                                onclick="openStudent('María López García')">
+                                Atender →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-item medium">
+
+                        <div class="alert-header">
+
+                            <span class="risk-badge warning">
+                                🟡 PRECAUCIÓN
+                            </span>
+
+                            <small>
+                                Hace 2 h
+                            </small>
+
+                        </div>
+
+                        <h3>
+                            Andrea Ramírez
+                        </h3>
+
+                        <p>
+                            Administración · III ciclo
+                        </p>
+
+
+                        <div class="alert-reasons">
+
+                            <span>
+                                📅 Asistencia 79%
+                            </span>
+
+                        </div>
+
+
+                        <div class="alert-footer">
+
+                            <span>
+                                1 indicador detectado
+                            </span>
+
+                            <button
+                                onclick="openStudent('Andrea Ramírez')">
+                                Atender →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-item medium">
+
+                        <div class="alert-header">
+
+                            <span class="risk-badge warning">
+                                🟡 PRECAUCIÓN
+                            </span>
+
+                            <small>
+                                Hoy
+                            </small>
+
+                        </div>
+
+                        <h3>
+                            Diego García
+                        </h3>
+
+                        <p>
+                            Ingeniería Electrónica · IX ciclo
+                        </p>
+
+
+                        <div class="alert-reasons">
+
+                            <span>
+                                💳 1 pago pendiente
+                            </span>
+
+                        </div>
+
+
+                        <div class="alert-footer">
+
+                            <span>
+                                1 indicador detectado
+                            </span>
+
+                            <button
+                                onclick="openStudent('Diego García')">
+                                Atender →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SEGUIMIENTO ================= -->
+
+            <section id="seguimiento"
+                     class="section">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            TUTORÍA
+                        </span>
+
+                        <h1>
+                            Seguimiento
+                        </h1>
+
+                        <p>
+                            Historial de atención y evolución de estudiantes.
+                        </p>
+
+                    </div>
+
+                    <button class="primary-button"
+                            onclick="showNotification('Nueva intervención creada')">
+                        + Registrar seguimiento
+                    </button>
+
+                </div>
+
+
+                <div class="timeline-panel panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Seguimientos recientes
+                            </h3>
+
+                            <p>
+                                Registro de intervenciones realizadas
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline">
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-marker red-marker">
+                                !
+                            </div>
+
+                            <div class="timeline-content">
+
+                                <div>
+
+                                    <strong>
+                                        Alerta académica generada
+                                    </strong>
+
+                                    <small>
+                                        Hoy · 09:20
+                                    </small>
+
+                                </div>
+
+                                <p>
+                                    Juan Carlos Pérez presenta bajo rendimiento e inasistencias.
+                                </p>
+
+                                <span>
+                                    Tutoría Universitaria
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-marker blue-marker">
+                                ♧
+                            </div>
+
+                            <div class="timeline-content">
+
+                                <div>
+
+                                    <strong>
+                                        Contacto con estudiante
+                                    </strong>
+
+                                    <small>
+                                        Ayer · 15:40
+                                    </small>
+
+                                </div>
+
+                                <p>
+                                    Se realizó contacto para conocer las causas del bajo rendimiento.
+                                </p>
+
+                                <span>
+                                    Tutor asignado
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-marker green-marker">
+                                ✓
+                            </div>
+
+                            <div class="timeline-content">
+
+                                <div>
+
+                                    <strong>
+                                        Seguimiento completado
+                                    </strong>
+
+                                    <small>
+                                        25 Ago · 11:10
+                                    </small>
+
+                                </div>
+
+                                <p>
+                                    El estudiante logró mejorar su asistencia durante la última semana.
+                                </p>
+
+                                <span>
+                                    Tutoría Universitaria
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= INTERVENCIONES ================= -->
+
+            <section id="intervenciones"
+                     class="section">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ATENCIÓN
+                        </span>
+
+                        <h1>
+                            Intervenciones
+                        </h1>
+
+                        <p>
+                            Acciones realizadas por el área de tutoría.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="intervention-grid">
+
+                    <div class="intervention-card">
+
+                        <div class="intervention-icon blue">
+                            ☎
+                        </div>
+
+                        <h3>
+                            Contacto telefónico
+                        </h3>
+
+                        <strong>
+                            48
+                        </strong>
+
+                        <span>
+                            intervenciones
+                        </span>
+
+                    </div>
+
+
+                    <div class="intervention-card">
+
+                        <div class="intervention-icon purple">
+                            ♧
+                        </div>
+
+                        <h3>
+                            Sesión de tutoría
+                        </h3>
+
+                        <strong>
+                            32
+                        </strong>
+
+                        <span>
+                            sesiones realizadas
+                        </span>
+
+                    </div>
+
+
+                    <div class="intervention-card">
+
+                        <div class="intervention-icon green">
+                            ✓
+                        </div>
+
+                        <h3>
+                            Casos solucionados
+                        </h3>
+
+                        <strong>
+                            26
+                        </strong>
+
+                        <span>
+                            estudiantes
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= CITAS ================= -->
+
+            <section id="citas"
+                     class="section">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            AGENDA
+                        </span>
+
+                        <h1>
+                            Citas de tutoría
+                        </h1>
+
+                        <p>
+                            Próximas sesiones programadas.
+                        </p>
+
+                    </div>
+
+                    <button class="primary-button"
+                            onclick="showNotification('Nueva cita programada')">
+                        + Nueva cita
+                    </button>
+
+                </div>
+
+
+                <div class="appointments">
+
+                    <div class="appointment panel">
+
+                        <div class="appointment-date">
+
+                            <strong>
+                                28
+                            </strong>
+
+                            <span>
+                                AGO
+                            </span>
+
+                        </div>
+
+                        <div class="appointment-info">
+
+                            <strong>
+                                Juan Carlos Pérez
+                            </strong>
+
+                            <span>
+                                Ingeniería de Sistemas · VII ciclo
+                            </span>
+
+                            <small>
+                                10:00 AM · Oficina de Tutoría
+                            </small>
+
+                        </div>
+
+                        <span class="appointment-status">
+                            Confirmada
+                        </span>
+
+                    </div>
+
+
+                    <div class="appointment panel">
+
+                        <div class="appointment-date">
+
+                            <strong>
+                                29
+                            </strong>
+
+                            <span>
+                                AGO
+                            </span>
+
+                        </div>
+
+                        <div class="appointment-info">
+
+                            <strong>
+                                María López García
+                            </strong>
+
+                            <span>
+                                Enfermería · IV ciclo
+                            </span>
+
+                            <small>
+                                11:30 AM · Oficina de Tutoría
+                            </small>
+
+                        </div>
+
+                        <span class="appointment-status">
+                            Pendiente
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= REPORTES ================= -->
+
+            <section id="reportes"
+                     class="section">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ANÁLISIS
+                        </span>
+
+                        <h1>
+                            Reportes
+                        </h1>
+
+                        <p>
+                            Indicadores para la toma de decisiones.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="report-grid">
+
+                    <button class="report-card"
+                            onclick="showNotification('Generando reporte académico')">
+
+                        <div class="report-icon blue">
+                            ▤
+                        </div>
+
+                        <h3>
+                            Riesgo académico
+                        </h3>
+
+                        <p>
+                            Estudiantes con bajo rendimiento y cursos desaprobados.
+                        </p>
+
+                        <span>
+                            Generar reporte →
+                        </span>
+
+                    </button>
+
+
+                    <button class="report-card"
+                            onclick="showNotification('Generando reporte de asistencia')">
+
+                        <div class="report-icon yellow">
+                            ◷
+                        </div>
+
+                        <h3>
+                            Asistencia
+                        </h3>
+
+                        <p>
+                            Inasistencias y tardanzas por carrera y ciclo.
+                        </p>
+
+                        <span>
+                            Generar reporte →
+                        </span>
+
+                    </button>
+
+
+                    <button class="report-card"
+                            onclick="showNotification('Generando reporte financiero')">
+
+                        <div class="report-icon orange">
+                            $
+                        </div>
+
+                        <h3>
+                            Situación de pagos
+                        </h3>
+
+                        <p>
+                            Estudiantes con obligaciones pendientes.
+                        </p>
+
+                        <span>
+                            Generar reporte →
+                        </span>
+
+                    </button>
+
+
+                    <button class="report-card"
+                            onclick="showNotification('Generando reporte de riesgo')">
+
+                        <div class="report-icon red">
+                            !
+                        </div>
+
+                        <h3>
+                            Riesgo de deserción
+                        </h3>
+
+                        <p>
+                            Distribución de estudiantes según nivel de alerta.
+                        </p>
+
+                        <span>
+                            Generar reporte →
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= CONFIGURACIÓN ================= -->
+
+            <section id="configuracion"
+                     class="section">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            SISTEMA
+                        </span>
+
+                        <h1>
+                            Configuración
+                        </h1>
+
+                        <p>
+                            Parámetros del sistema de alerta temprana.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-panel panel">
+
+                    <div class="setting">
+
+                        <div>
+
+                            <strong>
+                                Umbral de bajo rendimiento
+                            </strong>
+
+                            <p>
+                                Promedio académico considerado como indicador de riesgo.
+                            </p>
+
+                        </div>
+
+                        <div class="setting-value">
+                            <input type="number"
+                                   value="12"
+                                   min="0"
+                                   max="20">
+
+                            <span>
+                                / 20
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="setting">
+
+                        <div>
+
+                            <strong>
+                                Umbral de asistencia
+                            </strong>
+
+                            <p>
+                                Porcentaje mínimo recomendado de asistencia.
+                            </p>
+
+                        </div>
+
+                        <div class="setting-value">
+                            <input type="number"
+                                   value="80"
+                                   min="0"
+                                   max="100">
+
+                            <span>
+                                %
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="setting">
+
+                        <div>
+
+                            <strong>
+                                Activar alertas automáticas
+                            </strong>
+
+                            <p>
+                                Generar una alerta cuando se detecten indicadores de riesgo.
+                            </p>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input type="checkbox"
+                                   checked>
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <span>
+                SATE-UCH · Prototipo académico
+            </span>
+
+            <span>
+                Sistema de Alerta Temprana Estudiantil · 2026
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- ================= MODAL PERFIL ================= -->
+
+<div class="modal-overlay"
+     id="studentModal">
+
+    <div class="student-modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    PERFIL DEL ESTUDIANTE
+                </span>
+
+                <h2 id="modalStudentName">
+                    Juan Carlos Pérez
+                </h2>
+
+                <p id="modalStudentCareer">
+                    Ingeniería de Sistemas · VII ciclo
+                </p>
+
+            </div>
+
+            <button class="close-modal"
+                    onclick="closeStudent()">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-risk">
+
+            <div class="big-risk red">
+                🔴
+            </div>
+
+            <div>
+
+                <span>
+                    NIVEL DE RIESGO
+                </span>
+
+                <strong id="modalRisk">
+                    ALTO
+                </strong>
+
+                <small>
+                    Requiere atención prioritaria
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-indicators">
+
+            <div class="modal-indicator">
+
+                <span>
+                    Rendimiento
+                </span>
+
+                <strong id="modalGrade">
+                    10.8
+                </strong>
+
+                <small class="danger-text">
+                    Bajo
+                </small>
+
+            </div>
+
+
+            <div class="modal-indicator">
+
+                <span>
+                    Asistencia
+                </span>
+
+                <strong id="modalAttendance">
+                    68%
+                </strong>
+
+                <small class="danger-text">
+                    Riesgo
+                </small>
+
+            </div>
+
+
+            <div class="modal-indicator">
+
+                <span>
+                    Pagos
+                </span>
+
+                <strong id="modalPayments">
+                    Al día
+                </strong>
+
+                <small class="good-text">
+                    Normal
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-section">
+
+            <h3>
+                Indicadores detectados
+            </h3>
+
+            <div id="modalReasons"
+                 class="modal-reasons">
+
+                <span>
+                    📉 Bajo rendimiento académico
+                </span>
+
+                <span>
+                    📅 Inasistencia elevada
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-section">
+
+            <h3>
+                Recomendación
+            </h3>
+
+            <div class="recommendation">
+
+                <span>
+                    ♧
+                </span>
+
+                <p>
+                    Realizar contacto con el estudiante y programar una sesión de tutoría para identificar las causas de los indicadores detectados.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button class="secondary-button"
+                    onclick="closeStudent()">
+                Cerrar
+            </button>
+
+            <button class="primary-button"
+                    onclick="registerIntervention()">
+                Registrar intervención
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
